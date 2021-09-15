@@ -1,13 +1,14 @@
 class AsyncFileReader {
     constructor() {
         this._reader = new FileReader()
-        this._asBinaryString = 'binaryString'
+        this._asBinary = 'binary'
         this._asText = 'text'
-        this._asArrayBuffer = 'arrayBuffer'
+        this._asBuffer = 'buffer'
     }
 
     /**
-     * @param file
+     *
+     * @param {File|Blob} file
      * @returns {Promise<string>}
      */
     async readAsDataUrl(file) {
@@ -19,13 +20,13 @@ class AsyncFileReader {
      * @returns {Promise<string>}
      */
     async readAsBinaryString(file) {
-        return this._read(file, this._asBinaryString)
+        return this._read(file, this._asBinary)
     }
 
     /**
-     * 
-     * @param file
-     * @param encoding
+     *
+     * @param {File|Blob} file
+     * @param {string} encoding
      * @returns {Promise<string>}
      */
     async readAsText(file, encoding = 'UTF-8') {
@@ -33,18 +34,19 @@ class AsyncFileReader {
     }
 
     /**
-     * @param file
+     *
+     * @param {File|Blob} file
      * @returns {Promise<ArrayBuffer>}
      */
     async readAsArrayBuffer(file) {
-        return this._read(file, this._asArrayBuffer)
+        return this._read(file, this._asBuffer)
     }
 
     /**
-     * 
-     * @param file
-     * @param as
-     * @param encoding
+     *
+     * @param {File|Blob} file
+     * @param {string} as
+     * @param {string} encoding
      * @returns {Promise<string|ArrayBuffer>}
      * @private
      */
@@ -58,10 +60,10 @@ class AsyncFileReader {
                 case this._asText:
                     this._reader.readAsText(file, encoding);
                     break;
-                case this._asBinaryString:
+                case this._asBinary:
                     this._reader.readAsBinaryString(file);
                     break;
-                case this._asArrayBuffer:
+                case this._asBuffer:
                     this._reader.readAsArrayBuffer(file);
                     break;
                 default:
