@@ -40,7 +40,7 @@ class AsyncFileReader {
     }
 
     /**
-     * @param file
+     * @param {File|Blob} file
      * @returns {Promise<string>}
      */
     async readAsBinaryString(file) {
