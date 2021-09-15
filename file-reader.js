@@ -66,12 +66,12 @@ class AsyncFileReader {
     /**
      *
      * @param {File|Blob} file
-     * @param {string} as
+     * @param {string<asBuffer|asText|asBinary>} as
      * @param {string} encoding
      * @returns {Promise<string|ArrayBuffer>}
      * @private
      */
-    async _read(file, as = 'dataUrl', encoding = 'UTF-8') {
+    async _read(file, as = '', encoding = 'UTF-8') {
         const reader = this._reader
         return new Promise(function (resolve, reject) {
             reader.onloadend = function (event) {
