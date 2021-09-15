@@ -1,5 +1,5 @@
 # Usage
 ```javascript
 const reader = new AsyncFileReader()
-fileAsDataUrl = reader.readAsDataUrl(file) 
+fileAsDataUrl = await reader.readAsDataUrl(file) 
 ````
