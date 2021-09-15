@@ -74,13 +74,8 @@ class AsyncFileReader {
     async _read(file, as = '', encoding = 'UTF-8') {
         const reader = this._reader
         return new Promise(function (resolve, reject) {
-            reader.onloadend = function (event) {
-                if (event.target.error !== null) {
-                    resolve(event.target.result)
-                }
-
-                reject(event.target.error)
-            }
+            reader.onload = (e) => resolve(e.target.result)
+            reader.onerror = (e) => reject(e.target.error)
             switch (as) {
                 case AsyncFileReader.asText():
                     reader.readAsText(file, encoding);
