@@ -1,9 +1,30 @@
 class AsyncFileReader {
     constructor() {
         this._reader = new FileReader()
-        this._asBinary = 'binary'
-        this._asText = 'text'
-        this._asBuffer = 'buffer'
+    }
+
+    /**
+     *
+     * @returns {string}
+     */
+    static asBinary() {
+        return 'binary'
+    }
+
+    /**
+     *
+     * @returns {string}
+     */
+    static asText() {
+        return 'text';
+    }
+
+    /**
+     *
+     * @returns {string}
+     */
+    static asBuffer() {
+        return 'buffer'
     }
 
     /**
@@ -51,23 +72,27 @@ class AsyncFileReader {
      * @private
      */
     async _read(file, as = 'dataUrl', encoding = 'UTF-8') {
-        return new Promise(resolve => {
-            this._reader.onloadend = function (event) {
-                resolve(event.target.result)
-            }
+        const reader = this._reader
+        return new Promise(function (resolve, reject) {
+            reader.onloadend = function (event) {
+                if (event.target.error !== null) {
+                    resolve(event.target.result)
+                }
 
+                reject(event.target.error)
+            }
             switch (as) {
-                case this._asText:
-                    this._reader.readAsText(file, encoding);
+                case AsyncFileReader.asText():
+                    reader.readAsText(file, encoding);
                     break;
-                case this._asBinary:
-                    this._reader.readAsBinaryString(file);
+                case AsyncFileReader.asBinary():
+                    reader.readAsBinaryString(file);
                     break;
-                case this._asBuffer:
-                    this._reader.readAsArrayBuffer(file);
+                case AsyncFileReader.asBuffer():
+                    reader.readAsArrayBuffer(file);
                     break;
                 default:
-                    this._reader.readAsDataURL(file)
+                    reader.readAsDataURL(file)
             }
         })
     }
