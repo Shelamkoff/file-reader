@@ -1,4 +1,3 @@
-export default new AsyncFileReader();
 class AsyncFileReader {
     constructor() {
         this._reader = new FileReader()
@@ -96,3 +95,4 @@ class AsyncFileReader {
         })
     }
 }
+export default new AsyncFileReader();
