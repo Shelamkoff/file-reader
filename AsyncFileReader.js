@@ -1,10 +1,11 @@
+export default new AsyncFileReader();
 class AsyncFileReader {
     constructor() {
         this._reader = new FileReader()
     }
 
     /**
-     * 
+     *
      * @returns {string}
      * @private
      */
@@ -13,7 +14,7 @@ class AsyncFileReader {
     }
 
     /**
-     * 
+     *
      * @returns {string}
      * @private
      */
@@ -22,7 +23,7 @@ class AsyncFileReader {
     }
 
     /**
-     * 
+     *
      * @returns {string}
      * @private
      */
